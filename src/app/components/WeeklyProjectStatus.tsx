@@ -36,7 +36,7 @@ const WeeklyProjectStatus = () => {
             width={24}
             height={24}
           />
-          <h1 className="text-xl font-semibold ml-2">Weekly Project Status</h1>
+          <h1 className="text-xl font-semibold ml-4">Weekly Project Status</h1>
         </div>
         <div className="bg-[#2C3035]"></div>
         <div className="bg-[#2C3035] p-2">

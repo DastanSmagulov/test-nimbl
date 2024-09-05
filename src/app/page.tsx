@@ -17,16 +17,15 @@ export default function Home() {
   useEffect(() => {
     const timeline = gsap.timeline();
 
-    // Initial line pop-up and expand
     timeline
       .fromTo(
         lineRef.current,
-        { opacity: 0, scaleY: 0, height: "0vh", y: "0%" }, // Line starts hidden
+        { opacity: 0, display: "block", scaleY: 0, height: "0vh", y: "0%" },
         {
           opacity: 1,
           scaleY: 1,
           height: "10vh", // Line grows vertically to the middle of the screen
-          duration: 0.6,
+          duration: 0.5,
           transformOrigin: "center center",
           ease: "power3.inOut",
         }
@@ -70,7 +69,7 @@ export default function Home() {
     <div className="relative w-full h-[90vh] flex justify-center items-center bg-neutral-900">
       <div
         ref={lineRef}
-        className="absolute w-2 h-10 bg-gradient-to-r from-[#26C9FF] via-[#8D79FE] to-[#F18145] rounded-full shadow-lg"
+        className="absolute hidden w-2 h-10 bg-gradient-to-r from-[#26C9FF] via-[#8D79FE] to-[#F18145] rounded-full shadow-lg"
         style={{
           top: "45%",
           left: "50%",
@@ -87,7 +86,7 @@ export default function Home() {
 
       {/* Corner Components */}
       <div
-        className="absolute top-4 left-4 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute top-0 left-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[0] = el!;
         }}
@@ -95,7 +94,7 @@ export default function Home() {
         <TodoList />
       </div>
       <div
-        className="absolute top-4 right-4 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute top-0 right-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[1] = el!;
         }}
@@ -103,7 +102,7 @@ export default function Home() {
         <Milestone />
       </div>
       <div
-        className="absolute bottom-4 left-4 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute bottom-0 left-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[2] = el!;
         }}
@@ -111,7 +110,7 @@ export default function Home() {
         <RecentActivity />
       </div>
       <div
-        className="absolute bottom-4 right-4 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute bottom-0 right-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[3] = el!;
         }}

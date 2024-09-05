@@ -16,7 +16,7 @@ const Header = () => {
       </div>
 
       {/* Center Section: Tabs */}
-      <div className="hidden lg:flex space-x-2 md:space-x-4 items-center ml-0 md:ml-10 lg:ml-20">
+      <div className="hidden lg:flex space-x-2 md:space-x-4 items-center ml-0 md:ml-20 lg:ml-48">
         <button className="flex items-center space-x-2 border border-[#35373B] text-white px-2 py-1 md:px-4 md:py-2 rounded-full">
           <Image
             src="/images/weekly_task.png"

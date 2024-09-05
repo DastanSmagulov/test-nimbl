@@ -36,7 +36,7 @@ const TodoList = () => {
             width={24}
             height={24}
           />
-          <h1 className="text-xl font-semibold ml-2">To-do list</h1>
+          <h1 className="text-xl font-semibold ml-4">To-do list</h1>
         </div>
         <div className="bg-[#2C3035]"></div>
         <div className="bg-[#2C3035] p-2">
