@@ -20,41 +20,46 @@ export default function Home() {
     timeline
       .fromTo(
         lineRef.current,
-        { opacity: 0, display: "block", scaleY: 0, height: "0vh", y: "0%" },
+        {
+          opacity: 0,
+          display: "block",
+          scaleY: 0,
+          height: "0vh",
+          y: "0%",
+          bottom: "0%",
+        },
         {
           opacity: 1,
           scaleY: 1,
-          height: "10vh", // Line grows vertically to the middle of the screen
-          duration: 0.5,
+          height: "10vh", // Line grows vertically
+          duration: 0.7,
+          bottom: "40%",
           transformOrigin: "center center",
           ease: "power3.inOut",
         }
       )
       .to(lineRef.current, {
-        height: "150px", // Shrinks height to match the MainContainer
-        width: "45vw", // Line becomes as wide as MainContainer
-        duration: 1,
+        duration: 0.2,
         ease: "power2.out",
         onComplete: () => {
           // After the line shrinks, reveal the MainContainer
           gsap.fromTo(
             mainRef.current,
-            { opacity: 0.7, scale: 0.8 },
+            { opacity: 0, scale: 0.2 }, // Start from a small scale
             {
               opacity: 1,
               scale: 1,
-              duration: 0.3,
+              duration: 0.6,
               ease: "power3.out",
             }
           );
 
-          // Show corner components with staggered effect
+          // Show corner components without staggered effect
           gsap.to(cornerRefs.current, {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.8,
-            stagger: 0.2,
+            duration: 1.8,
             ease: "power3.out",
           });
         },
@@ -69,9 +74,9 @@ export default function Home() {
     <div className="relative w-full h-[90vh] flex justify-center items-center bg-neutral-900">
       <div
         ref={lineRef}
-        className="absolute hidden w-2 h-10 bg-gradient-to-r from-[#26C9FF] via-[#8D79FE] to-[#F18145] rounded-full shadow-lg"
+        className="absolute hidden w-4 h-10 bg-gradient-to-r from-[#26C9FF] via-[#8D79FE] to-[#F18145] rounded-full shadow-lg"
         style={{
-          top: "45%",
+          bottom: "45%",
           left: "50%",
           transform: "translate(-50%, -50%)", // Center the line
           background: `linear-gradient(0deg, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0.50) 100%), 
@@ -86,7 +91,7 @@ export default function Home() {
 
       {/* Corner Components */}
       <div
-        className="absolute top-0 left-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute top-10 left-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[0] = el!;
         }}
@@ -94,7 +99,7 @@ export default function Home() {
         <TodoList />
       </div>
       <div
-        className="absolute top-0 right-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute top-10 right-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[1] = el!;
         }}
@@ -102,7 +107,7 @@ export default function Home() {
         <Milestone />
       </div>
       <div
-        className="absolute bottom-0 left-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute bottom-10 left-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[2] = el!;
         }}
@@ -110,7 +115,7 @@ export default function Home() {
         <RecentActivity />
       </div>
       <div
-        className="absolute bottom-0 right-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
+        className="absolute bottom-10 right-0 opacity-0 transform scale-95 bg-[#1C1F2] p-2 rounded-lg text-white text-lg font-semibold"
         ref={(el) => {
           cornerRefs.current[3] = el!;
         }}

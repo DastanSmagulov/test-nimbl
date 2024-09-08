@@ -6,11 +6,21 @@ const MainContainer = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0, y: -50 },
-      { opacity: 1, y: 0, duration: 1 }
-    );
+    const timeline = gsap.timeline();
+
+    // Animate opacity and scale separately for smoother appearance
+    timeline
+      .fromTo(
+        containerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, ease: "power2.out" }
+      )
+      .fromTo(
+        containerRef.current,
+        { scale: 0.2 },
+        { scale: 1, duration: 0.7, ease: "power2.out" },
+        "-=0.2" // Overlap the animations for a smoother look
+      );
   }, []);
 
   return (
@@ -22,7 +32,6 @@ const MainContainer = () => {
         width: "50vw",
       }}
     >
-      {/* Main gradient container */}
       <div
         className="flex flex-col items-start p-6 rounded-lg shadow-lg"
         style={{
@@ -37,14 +46,19 @@ const MainContainer = () => {
         {/* Profile Icon and Input */}
         <div className="flex flex-col w-full">
           {/* Profile Icon */}
-          <div className="mr-4 flex mb-10 items-center">
-            <Image
-              src="/images/prompt.jpg" // Add the path to your profile icon here
-              width={48}
-              height={48}
-              alt="Profile Icon"
+          <div className="mr-4 flex mb-5 items-center">
+            <video
+              src="/videos/video.mp4"
+              width={60}
+              height={60}
               className="rounded-full mr-3"
-            />
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              Your browser does not support the video tag.
+            </video>
             <h1
               className="text-xl text-[#17191C]"
               style={{ fontFamily: "General Sans" }}
@@ -60,7 +74,7 @@ const MainContainer = () => {
               <input
                 type="text"
                 placeholder="Describe what you would like to create..."
-                className="input input-bordered w-full pl-4 pr-12 py-7 bg-[#17191C] text-white"
+                className="input input-bordered w-full pl-4 pr-12 py-8 bg-[#17191C] text-white text-lg"
                 style={{
                   borderRadius: "12px", // Adjusted radius for input field
                   borderColor: "transparent",

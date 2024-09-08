@@ -1,12 +1,12 @@
-// app/components/RecentActivity.tsx
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const RecentActivity = () => {
-  const recentActivityRef = useRef(null);
+  const recentActivityRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
 
   useEffect(() => {
     gsap.from(recentActivityRef.current, {
@@ -23,13 +23,19 @@ const RecentActivity = () => {
     });
   }, []);
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div
       ref={recentActivityRef}
-      className="bg-[#1C1F22] p-10 rounded-3xl w-[400px] h-[200px]"
+      className={`bg-[#1C1F22] p-10 rounded-3xl w-[400px] ${
+        isOpen ? "" : "h-[200px]"
+      } flex flex-col`}
     >
       {/* Header */}
-      <div className="flex tems-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <Image
             src="/images/recent.png"
@@ -39,10 +45,13 @@ const RecentActivity = () => {
           />
           <h1 className="text-xl font-semibold ml-4">Recent Activity</h1>
         </div>
-        <div className="bg-[#2C3035]"></div>
-        <div className="bg-[#2C3035] p-2">
-          <IoIosArrowDown className="text-base" />
-        </div>
+        <button className="bg-[#2C3035] p-2" onClick={toggleDropdown}>
+          {isOpen ? (
+            <IoIosArrowUp className="text-base" />
+          ) : (
+            <IoIosArrowDown className="text-base" />
+          )}
+        </button>
       </div>
 
       {/* Divider */}
@@ -53,33 +62,78 @@ const RecentActivity = () => {
         }}
       />
 
-      {/* To-do Item */}
-      <div className="flex items-center justify-between">
-        <div className="flex">
-          <input
-            type="checkbox"
-            className="mr-3 mt-1"
-            style={{
-              width: "24px",
-              height: "24px",
-              border: "2px solid #9A9A9A",
-              borderRadius: "4px",
-              backgroundColor: "#1C1C1E",
-            }}
-          />
-          <span className="text-base text-white">Lorem Ipsum is simply</span>
+      {/* Main Content */}
+      <div className="flex flex-col gap-2">
+        {/* To-do Item */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <Image
+              src="/images/avatar-recent.png"
+              alt="User avatar"
+              width={36} // Adjust size to match image
+              height={36}
+              className="rounded-full mr-4"
+            />
+            <div>
+              <span className="text-sm text-white font-semibold">
+                Dias Nurbergenov
+              </span>
+              <p className="text-sm text-gray-400">
+                Changed the status of{" "}
+                <span className="text-[#2C7DFA]">Nimbl</span>
+              </p>
+            </div>
+          </div>
+          <div className="text-gray-500 text-xs">10 min ago</div>
         </div>
 
-        <div className="flex items-center ml-3">
-          <Image
-            src="/images/avatar-recent.png"
-            alt="Clock icon"
-            width={16}
-            height={16}
-            className="mr-1"
-          />
-          <span className="text-sm text-white ml-2">30 Sep</span>
-        </div>
+        {/* Additional Dropdown Content */}
+        {isOpen && (
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center">
+                <Image
+                  src="/images/avatar-recent.png"
+                  alt="User avatar"
+                  width={36} // Adjust size to match image
+                  height={36}
+                  className="rounded-full mr-4"
+                />
+                <div>
+                  <span className="text-sm text-white font-semibold">
+                    Dias Nurbergenov
+                  </span>
+                  <p className="text-sm text-gray-400">
+                    Changed the status of{" "}
+                    <span className="text-[#2C7DFA]">Nimbl</span>
+                  </p>
+                </div>
+              </div>
+              <div className="text-gray-500 text-xs">10 min ago</div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Image
+                  src="/images/avatar-recent.png"
+                  alt="User avatar"
+                  width={36} // Adjust size to match image
+                  height={36}
+                  className="rounded-full mr-4"
+                />
+                <div>
+                  <span className="text-sm text-white font-semibold">
+                    Dias Nurbergenov
+                  </span>
+                  <p className="text-sm text-gray-400">
+                    Changed the status of{" "}
+                    <span className="text-[#2C7DFA]">Nimbl</span>
+                  </p>
+                </div>
+              </div>
+              <div className="text-gray-500 text-xs">10 min ago</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
